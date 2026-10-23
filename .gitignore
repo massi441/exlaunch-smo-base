@@ -1,0 +1,9 @@
+cmake-build-*/
+build/
+deploy/
+
+.idea/
+.cache/
+.clangd
+.vscode/settings.json
+compile_commands.json
