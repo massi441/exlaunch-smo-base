@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(exlaunch_smo_base) # Rename to something that you like
+project(exlaunch_smo_base C CXX ASM) # Rename to something that you like
 
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_CXX_STANDARD 23)
