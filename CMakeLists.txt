@@ -45,8 +45,6 @@ if (NOT MOD_NAME)
     message(FATAL_ERROR "The variable 'MOD_NAME' must be specified in your configuration")
 endif ()
 
-# Pick a number for your subsdk, between 0 to 8; subsdk9 is reserved for the runtime.
-set(SUBSDK_DEPLOY_NAME "subsdk8")
 
 # Some configuration the framework expects
 set(ML_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/framework/tools)
