@@ -10,3 +10,4 @@ out/
 compile_commands.json
 
 CMakePresets.json
+TASK_LIST.md
