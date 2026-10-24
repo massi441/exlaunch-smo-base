@@ -14,22 +14,17 @@ add_compile_options(-fstandalone-debug)
 add_compile_options(-v -Wall -O3 -nodefaultlibs -nostdlib -ffunction-sections -fdata-sections)
 add_compile_options(-Werror=return-type)
 add_compile_options(-fno-asynchronous-unwind-tables -fno-unwind-tables)
-# add_compile_options(-fno-rtti) # Uncomment this if you want to disable RTTI
 add_compile_definitions(ARDUINOJSON_ENABLE_COMMENTS SWITCH)
 add_link_options(-shared -ffunction-sections -fdata-sections)
 add_link_options(-stdlib=libc++ -nodefaultlibs -nostdlib)
 
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/custom/)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/exlaunch/)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/custom/al)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/custom/game)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/custom/sead)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/smo/al)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/smo/agl)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/smo/game)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/smo/NintendoSDK)
-include_directories(${PROJECT_SOURCE_DIR}/src/runtime/libs/smo/sead)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/exlaunch/)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/smo/al)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/smo/agl)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/smo/game)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/smo/NintendoSDK)
+include_directories(${PROJECT_SOURCE_DIR}/src/framework/libs/smo/sead)
 
 add_compile_definitions(NNSDK=1)
 
@@ -39,8 +34,26 @@ set(NN_SDK_MINOR 5)
 set(NN_SDK_PATCH 1)
 set(NN_SDK_TYPE "Release")
 
-option(ML_ENABLE_LOG "Enable Logging" ON) # Logging macros expand to nothing if this is turned off. Plain calls to mallow::log::* still compile and run
+option(ENABLE_LOG "Enable Logging" ON) # Logging macros expand to nothing if this is turned off. Plain calls to mallow::log::* still compile and run
 
-# TODO: Add log compile definition
+if (ENABLE_LOG)
+    add_compile_definitions(ENABLE_LOG)
+endif()
 
-add_subdirectory(src)
+# Validation
+if (NOT MOD_NAME)
+    message(FATAL_ERROR "The variable 'MOD_NAME' must be specified in your configuration")
+endif ()
+
+# Pick a number for your subsdk, between 0 to 8; subsdk9 is reserved for the runtime.
+set(SUBSDK_DEPLOY_NAME "subsdk8")
+
+# Some configuration the framework expects
+set(ML_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/framework/tools)
+set(ML_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/out/${MOD_NAME})
+set(ML_SUBSDK_NAME_PROPERTY "ML_SUBSDK_NAME") # The name of the property of a target holding the name of the subsdk
+
+add_subdirectory(src/framework)
+add_subdirectory(src/mods)
+
+include(deploy.cmake)
