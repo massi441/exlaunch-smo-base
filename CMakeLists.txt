@@ -45,11 +45,9 @@ if (NOT MOD_NAME)
     message(FATAL_ERROR "The variable 'MOD_NAME' must be specified in your configuration")
 endif ()
 
-
 # Some configuration the framework expects
 set(ML_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/framework/tools)
 set(ML_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/out/${MOD_NAME})
-set(ML_SUBSDK_NAME_PROPERTY "ML_SUBSDK_NAME") # The name of the property of a target holding the name of the subsdk
 
 add_subdirectory(src/framework)
 add_subdirectory(src/mods)
