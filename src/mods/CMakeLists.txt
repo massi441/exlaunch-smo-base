@@ -2,6 +2,7 @@
 add_executable(example_mod)
 
 target_link_libraries(example_mod PRIVATE ml_subsdk_startup)
+target_link_libraries(example_mod PRIVATE ml_subsdk_common)
 
 target_sources(example_mod PRIVATE
     main.cpp

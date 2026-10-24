@@ -56,4 +56,5 @@ set(ML_SUBSDK_NAME_PROPERTY "ML_SUBSDK_NAME") # The name of the property of a ta
 add_subdirectory(src/framework)
 add_subdirectory(src/mods)
 
+# Deployment
 include(deploy.cmake)
