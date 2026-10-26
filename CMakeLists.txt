@@ -34,13 +34,13 @@ set(NN_SDK_MINOR 5)
 set(NN_SDK_PATCH 1)
 set(NN_SDK_TYPE "Release")
 
-if (NOT ML_MOD_NAME)
-    message(FATAL_ERROR "The variable 'ML_MOD_NAME' must be specified in your configuration")
+if (NOT MOD_NAME)
+    message(FATAL_ERROR "The variable 'MOD_NAME' must be specified in your configuration")
 endif ()
 
 # Some configuration the framework expects
 set(ML_TOOLS_DIR ${CMAKE_SOURCE_DIR}/src/framework/tools)
-set(ML_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/out/${ML_MOD_NAME})
+set(ML_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/out/${MOD_NAME})
 
 option(ML_ENABLE_LOG "Enable Logging" ON) # Logging macros expand to nothing if this is turned off. Plain calls to mallow::log::* still compile and run
 
