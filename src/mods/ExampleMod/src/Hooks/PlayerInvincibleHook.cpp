@@ -4,6 +4,7 @@
 #include <Player/PlayerTrigger.h>
 #include <Scene/StageScene.h>
 #include <exl/hook/trampoline.hpp>
+#include <ml/CoreSMO/Util/SceneUtil.h>
 #include <ml/Log/Log.h>
 #include <ml/Mod/ModUtil.h>
 
@@ -36,6 +37,12 @@ HOOK_DEFINE_TRAMPOLINE(StageScenePlayHook) {
             }
 
             ml::setModStorageValue("InvincibleEnabled", sInvincibleEnabled);
+        }
+
+        if (al::isPadTriggerRight(-1)) {
+            ml::reloadScene(thisPtr);
+
+            LOG_DEBUG("Right was pressed, scene will be reloaded");
         }
     }
 };

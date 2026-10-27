@@ -6,9 +6,10 @@
 #include <Library/Nerve/NerveSetupUtil.h>
 #include <Library/Nerve/NerveUtil.h>
 #include <Library/Placement/PlacementFunction.h>
+#include <Util/SensorMsgFunction.h>
+#include <ml/CoreSMO/Util/StageSwitchUtil.h>
 #include <ml/Input/InputUtil.h>
 #include <ml/Log/Log.h>
-#include <Util/SensorMsgFunction.h>
 
 namespace {
 
@@ -30,7 +31,7 @@ void MyActor::init(const al::ActorInitInfo& info) {
 
     al::tryGetStringArg(&mCapHitMessage, info, "CapHitMessage"); // this reads the debug message property stored in the level editor
 
-    this->makeActorAlive();
+    ml::initSwitchAppear(this);
 }
 
 void MyActor::attackSensor(al::HitSensor* self, al::HitSensor* other) {
