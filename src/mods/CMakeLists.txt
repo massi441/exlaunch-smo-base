@@ -21,6 +21,13 @@ target_sources(ml_mod PRIVATE
 # Then, update your CMakePreset.json's presets to enable the mods of your choice
 ml_add_registerable_mod(example_mod ExampleMod BUILD_EXAMPLE REGISTER_EXAMPLE)
 
+option(ML_DISABLE_SYMBOLS "Strip symbols from the mod's final build" OFF)
+
+if (ML_DISABLE_SYMBOLS)
+    target_compile_options(ml_mod PRIVATE -fvisibility=hidden -fvisibility-inlines-hidden)
+    target_link_options(ml_mod PRIVATE -Wl,-s -Wl,--exclude-libs,ALL)
+endif()
+
 # Pick a number for your subsdk, between 0 to 8; subsdk9 is reserved for the runtime.
 # The last parameter is the name of the NSO module (which shows up in stack traces)
 make_subsdk(ml_mod "subsdk8" "ml_mod")
