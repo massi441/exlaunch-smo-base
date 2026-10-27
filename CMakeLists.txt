@@ -49,6 +49,7 @@ if (ML_ENABLE_LOG)
 endif()
 
 # Framework and Mods
+include(${CMAKE_SOURCE_DIR}/src/framework/src/ml/cmake/mod-registry.cmake)
 add_subdirectory(src/framework)
 add_subdirectory(src/mods)
 
