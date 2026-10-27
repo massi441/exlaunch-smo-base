@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "smo-base",
+      "displayName": "Base SMO build preset",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "toolchainFile": "${sourceDir}/src/framework/cmake/toolchain.cmake",
+      "warnings": {
+        "uninitialized": true
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "ML_ENABLE_LOG": "ON",
+        "ML_DISABLE_SYMBOLS": "ON",
+        "ML_RUNTIME_BUILD_MODE": "STATIC",
+        "YUZU_MODS_PATH": "{YOUR_USER_PATH}/AppData/Roaming/yuzu/load/0100000000010000",
+        "RYUJINX_MODS_PATH": "{YOUR_USER_PATH}/AppData/Roaming/Ryujinx/mods/contents/0100000000010000"
+      }
+    },
+    {
+      "name": "example-mod",
+      "inherits": "smo-base",
+      "cacheVariables": {
+        "MOD_NAME": "ExampleMod",
+        "BUILD_EXAMPLE": "ON"
+      }
+    }
+  ]
+}

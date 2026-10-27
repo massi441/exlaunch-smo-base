@@ -9,5 +9,4 @@ out/
 .vscode/settings.json
 compile_commands.json
 
-CMakePresets.json
 TASK_LIST.md
