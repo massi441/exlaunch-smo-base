@@ -2,8 +2,6 @@
 
 #include <Library/LiveActor/LiveActor.h>
 
-namespace ml {
-
 /**
  * A simple static actor that reacts to Cappy's attacks and damages
  * Mario when touching him.
@@ -23,5 +21,3 @@ public:
 private:
     const char* mCapHitMessage = nullptr;
 };
-
-}

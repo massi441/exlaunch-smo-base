@@ -6,11 +6,9 @@
 #include <Library/Nerve/NerveSetupUtil.h>
 #include <Library/Nerve/NerveUtil.h>
 #include <Library/Placement/PlacementFunction.h>
-#include <Util/SensorMsgFunction.h>
 #include <ml/Input/InputUtil.h>
 #include <ml/Log/Log.h>
-
-namespace ml {
+#include <Util/SensorMsgFunction.h>
 
 namespace {
 
@@ -75,6 +73,4 @@ void MyActor::exeCapHit() {
     if (al::isActionEnd(this)) {
         al::setNerve(this, &NrvMyActor.Wait);
     }
-}
-
 }
